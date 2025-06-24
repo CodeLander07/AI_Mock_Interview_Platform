@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import DisplayTechIcons from "./DisplayTechIcons";
 
 import { cn, getRandomInterviewCover } from "@/lib/utils";
-// import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
+import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
 
 const InterviewCard = async ({
   interviewId,
@@ -41,12 +41,15 @@ const InterviewCard = async ({
     <div className="card-border w-[360px] max-sm:w-full min-h-96">
       <div className="card-interview">
         <div>
-          {/* Type Badge */}
-          <div
-            className = 'absolute top-0 right-0 flex items-center justify-center px-3 py-1 rounded-full text-white text-xs'
-          >
-            <p className="badge-text ">{normalizedType}</p>
-          </div>
+            {/* Type Badge */}
+            <div
+            className={cn(
+              badgeColor,
+              'absolute top-0 right-0 flex items-center justify-center px-3 py-1 rounded-full text-white text-xs'
+            )}
+            >
+            <p className="badge-text">{normalizedType}</p>
+            </div>
 
           {/* Cover Image */}
           <Image
