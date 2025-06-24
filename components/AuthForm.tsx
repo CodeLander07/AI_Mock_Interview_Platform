@@ -1,4 +1,5 @@
 "use client"
+
 import Link from "next/link"
 import {toast } from 'sonner'
 import { useForm } from "react-hook-form"
@@ -8,6 +9,9 @@ import {Form} from "@/components/ui/form"
 import FormField from "@/components/FormField"
 import Image from "next/image"
 import { useRouter } from "next/navigation";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth"
+import  {auth} from "@/firebase/client"
+import { signUp ,signIn} from "@/lib/actions/auth.action"
 
 
 //form Schema
@@ -33,11 +37,38 @@ const AuthForm = ({type}:{type : FormType}) => {
  
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    
+    //sign up
     try {
         if (type === "sign-up") {
+            const { name, email, password } = values;
+
+            const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+            const result = await signUp({
+                uid: userCredentials.user.uid,
+                name: name!,
+                email,
+                password
+            })
+            if(!result?.success) {
+                toast.error(result?.message);
+                return;}
             toast.success("Account created successfully!");
             router.push("/sign-in");
-        } else {
+        } 
+        //sign in
+        else {
+            const { email, password } = values;
+            const userCredentials = await signInWithEmailAndPassword(auth, email, password);
+            const idToken = await userCredentials.user.getIdToken();
+            if (!idToken) {
+                toast.error("Invalid credentials");
+                return;
+            }
+            await signIn({
+                email,
+                idToken
+            })
             toast.success("Sign in successful!");
             router.push("/");
         }
