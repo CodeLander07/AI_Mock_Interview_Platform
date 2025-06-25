@@ -4,15 +4,15 @@ import { redirect } from 'next/navigation';
 // import { redirect } from "next/navigation";
 
 const AuthLayout = async ({children}:{children:React.ReactNode}) => {
-  const isUserAuthenticated = await isAuthenticated(); // Replace with actual authentication logic
-    if (!isUserAuthenticated && window.location.pathname !== '/') {
-      redirect('/sign-in');
-    }
+  const isUserAuthenticated = await isAuthenticated();
+  if (!isUserAuthenticated) {
+    redirect('/sign-in');
+  }
   return (
     <div className='auth-layout'>
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default  AuthLayout
+export default  AuthLayout;
