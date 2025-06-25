@@ -3,16 +3,18 @@ import Image from 'next/image';
 import { cn } from "@/lib/utils";
 
 
+enum CallStatus {
+    INACTIVE = 'INACTIVE',
+    CONNECTING = 'CONNECTING',
+    ACTIVE = 'ACTIVE',
+    FINISHED = 'FINISHED',
+}
+
 const isSpeaking = true; 
-    enum CallStatus {
-        INACTIVE='INACTIVE',
-        CONNECTING='CONNECTING',
-        ACTIVE='ACTIVE',
-        FINSHED='FINSHED',
-    }
+
 const Agent = ({userName}:AgentProps) => {
-    
-    const callStatus = CallStatus.FINSHED; // Example status, can be INACTIVE, CONNECTING, ACTIVE, or FINSHED
+    // For demonstration, use useState to allow callStatus to be any CallStatus value
+    const [callStatus] = React.useState<CallStatus>(CallStatus.FINISHED);
     const messege = [
         'Hello, how are you?',
         'I am fine, thank you',
@@ -60,11 +62,11 @@ const Agent = ({userName}:AgentProps) => {
     }
 
     <div className='w-full flex justify-center'>
-        { callStatus !== 'ACTIVE' ? (
+        { callStatus !== CallStatus.ACTIVE ? (
             <button className='relative btn-call' >
-                <span className={cn('absolute animate-ping rounded-full opacity-75', callStatus === 'CONNECTING' & 'hidden')} />
+                <span className={cn('absolute animate-ping rounded-full opacity-75', callStatus === CallStatus.CONNECTING && 'hidden')} />
                     
-               <span>   {callStatus === 'INACTIVE' || callStatus === 'FINSHED' ? 'call':'Connecting...'}    </span>
+               <span>   {callStatus === CallStatus.INACTIVE || callStatus === CallStatus.FINISHED ? 'call':'Connecting...'}    </span>
             </button>
         ) : (
             <button className='btn-disconnect'> Disconnect</button>
