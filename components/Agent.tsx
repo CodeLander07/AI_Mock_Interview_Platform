@@ -1,6 +1,12 @@
-import React from 'react'
+`use client`
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from "@/lib/utils";
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { set } from 'zod';
+import { vapi,  } from '@/lib/vapi.sdk';
+import { ca } from 'zod/v4/locales';
 
 
 enum CallStatus {
@@ -10,25 +16,72 @@ enum CallStatus {
     FINISHED = 'FINISHED',
 }
 
-const isSpeaking = true; 
+interface SavedMessage{
+    role : 'user' | 'assistant' | 'system';
+    content: string;
+}
 
-const Agent = ({userName}:AgentProps) => {
+const Agent = ({userName , userId , type}:AgentProps) => {
     // For demonstration, use useState to allow callStatus to be any CallStatus value
-    const [callStatus] = React.useState<CallStatus>(CallStatus.FINISHED);
-    const messege = [
-        'Hello, how are you?',
-        'I am fine, thank you',
-        'How is your day going?',
-        'It is going well, thank you',
-        'How is your family?',
-        'They are fine, thank you',
-        'How is your work?',
-        'It is going well, thank you',
-        'How is your health?',
-        'It is going well, thank you',
-    ];
-    const lastMessege = messege[messege.length - 1];
-    
+
+    const router = useRouter();
+    const [isSpeaking, setIsSpeaking] = useState(false);
+    const [callStatus, setcallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
+    const [message , setMessage] = useState<SavedMessage[]>([]);
+
+    useEffect(() => {
+        const onCallStart = () => setcallStatus(CallStatus.ACTIVE);
+        const onCallEnd = () => setcallStatus(CallStatus.FINISHED);
+        // const onCallConnecting = () => setcallStatus(CallStatus.CONNECTING);
+        const onMessage = (message: Message) => {
+            if(message.type === 'transcript' && message.transcriptType === 'final') {
+                const newMessage = {role :message.role, content :message.transcript};
+
+                setMessage((prev) => [...prev, newMessage]);
+
+            }
+        }
+
+        const onSpeechStart = () => setIsSpeaking(true);
+        const onSpeechEnd = () => setIsSpeaking(false);
+
+        const onCallError = (error: Error) => {
+            console.error('Call error:', error);
+        };
+
+        vapi.on('call-start', onCallStart);
+        vapi.on('call-end', onCallEnd);
+        // vapi.on('call-connecting', () => setcallStatus(CallStatus.CONNECTING));
+        vapi.on('message', onMessage);
+        vapi.on('speech-start', onSpeechStart);
+        vapi.on('speech-end', onSpeechEnd);
+        vapi.on('error', onCallError);
+    },[]);
+    useEffect(() => {
+        if(callStatus === CallStatus.FINISHED) router.push('/'); 
+    },[message,callStatus,type,userId]);
+
+    const handleCall = async () => {
+        
+        setcallStatus(CallStatus.CONNECTING);
+
+        await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+            variableValue: {
+                username: userName,
+                userid: userId,
+            }
+        });
+    };
+    const handleDisconnect = async () => {
+        setcallStatus(CallStatus.FINISHED);
+        await vapi.stop();
+        // router.push('/');
+    }
+
+    const latestMessage = message[message.length - 1]?.content;
+    const isCallInactiveOrFinished = callStatus === CallStatus.INACTIVE || callStatus === CallStatus.FINISHED;
+
+
   return (
     <>
      <div className='call-view'>
