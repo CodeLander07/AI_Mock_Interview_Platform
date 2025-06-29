@@ -1,6 +1,7 @@
 'use server';
 
 import { auth, db } from "@/firebase/admin";
+import { limit } from "firebase/firestore";
 import { cookies } from "next/headers";
 
 // Session duration (1 week)
@@ -129,4 +130,34 @@ export async function getCurrentUser(): Promise<User | null> {
 export async function isAuthenticated() {
   const user = await getCurrentUser();
   return !!user;
+}
+
+
+export async function getInterviewByUserId(userId :string) : Promise<Interview[] | null>{
+  const Interview = await db
+    .collection('interviews')
+    .where('userId', '==', userId)
+    .orderBy('createdAt', 'desc')
+    .get();
+
+    return Interview.docs.map((doc) => ({
+      id:doc.id,
+      ...doc.data(),
+    })) as Interview[] ;
+}
+export async function getLatestInterviews(params:GetLatestInterviewsParams) : Promise<Interview[] | null>{
+  const { userId ,limit = 20 } = params;
+
+  const Interview = await db
+    .collection('interviews')
+    .orderBy('createdAt', 'desc')
+    .where('finalized', '==', userId)
+    .where('userId', '!=', userId)
+    .limit(limit)
+    .get();
+
+    return Interview.docs.map((doc) => ({
+      id:doc.id,
+      ...doc.data(),
+    })) as Interview[] ;
 }
