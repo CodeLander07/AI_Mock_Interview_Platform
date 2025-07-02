@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
-import { dummyInterviews } from '@/constants'
+// import { dummyInterviews } from '@/constants'
 import InterviewCard from '@/components/InterviewCard'
-import { getCurrentUser, getLatestInterviews } from '@/lib/actions/auth.action'
-import { getInterviewsByUserId } from '@/lib/actions/general.action'
+import { getCurrentUser } from '@/lib/actions/auth.action'
+import { getInterviewsByUserId,getLatestInterviews } from '@/lib/actions/general.action'
 const page = async () => {
   const user = await getCurrentUser();
   const [userInterviews, latestInterviews] = await Promise.all([
@@ -24,7 +24,7 @@ const page = async () => {
       <p className='text-lg'>
         Practice on real interview questions, get AI-generated feedback, and improve your performance with PrepWise.
       </p>
-      <Button  className='btn-primary max-sm:w-full' > <Link href='/interview'>Get Started</Link>Start Your Interview</Button>
+      <Button  className='btn-primary max-sm:w-full' > <Link href='/interview'>Get Start</Link></Button>
     </div>
     <Image
       src="/robot.png"
