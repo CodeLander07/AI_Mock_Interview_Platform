@@ -228,3 +228,50 @@ export const dummyInterviews: Interview[] = [
     createdAt: "2024-03-14T15:30:00Z",
   },
 ];
+
+export const problems = [
+  {
+    title: "No Real Interview Practice",
+    description: "Most job seekers, especially freshers, don’t get to practice real spoken interviews. Silent or text practice doesn’t show how they’ll perform under real pressure."
+  },
+  {
+    title: "Too Much Focus on Coding Only",
+    description: "Platforms like LeetCode focus just on coding. But real interviews also test your speaking, confidence, behavior, and team fit."
+  },
+  {
+    title: "No Feedback After Interviews",
+    description: "Many companies just send rejection emails without any reason. Candidates don’t know what went wrong or how to do better."
+  },
+  {
+    title: "Colleges Can’t Give Practice at Scale",
+    description: "Universities can’t give one-on-one mock interviews to all students. They also don’t have tools to track student progress over time."
+  }
+];
+
+
+export const solutions = [
+  {
+    title: "Practice Real-Time Interviews",
+    description: "Do voice-based mock interviews with smart AI that feels like the real thing."
+  },
+  {
+    title: "Get Instant Feedback",
+    description: "Right after the interview, get helpful tips based on how you spoke and performed."
+  },
+  {
+    title: "Track Your Improvement",
+    description: "See your progress over time. Know what you're good at and what needs work."
+  },
+  {
+    title: "Easy Interview Setup",
+    description: "Start mock interviews quickly using a simple chat with AI."
+  },
+  {
+    title: "Great for Colleges and Pros",
+    description: "Offers bulk plans for schools and working professionals, with dashboards and reports for tracking."
+  },
+  {
+    title: "Build Speaking Confidence",
+    description: "Practice often to reduce fear, improve communication, and feel more confident during real interviews."
+  }
+];
