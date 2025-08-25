@@ -7,11 +7,9 @@ export default function ComingSoon() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-10"></div>
-      
+    
       {/* Animated background elements */}
-      <div className="absolute top-20 left-20 w-72 h-72rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+      <div className="absolute top-20 left-20 w-72 h-72 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
       <div className="absolute top-40 right-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
       <div className="absolute -bottom-32 left-40 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-4000"></div>
       
@@ -32,7 +30,7 @@ export default function ComingSoon() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mt-6 mb-8">
               <Image
                 src="/logo.svg"
-                alt="Antriview Logo"
+                alt="Prepmaster"
                 width={40}
                 height={40}
               />

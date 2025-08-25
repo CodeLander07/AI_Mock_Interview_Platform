@@ -17,11 +17,7 @@ const Footer = () => {
                             <img src="/icons/github.svg" alt="github" className="w-8 h-8" />
                         </a>
                     </div>
-                    {/* <div className="social-icon">
-                        <a href="https://x.com/Mayur_nikumbh07" target="_blank" rel="noopener noreferrer">
-                            <img src="/icons/twitter.svg" alt="twitter" className="w-8 h-6"/>
-                        </a>
-                    </div> */}
+
                     <div className="social-icon">
                         <a href="https://www.instagram.com/mayurnikumbh07/" target="_blank" rel="noopener noreferrer">
                             <img src="/icons/instagram.svg" alt="instagram" className="w-8 h-8"  />

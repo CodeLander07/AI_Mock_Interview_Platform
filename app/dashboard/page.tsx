@@ -12,10 +12,10 @@ const page = async () => {
     await getInterviewsByUserId(user?.id!),
     await getLatestInterviews({ userId: user?.id!})
   ])
-  // const  = await getInterviewsByUserId(user?.id!);
+  // const  = await getInterviewsByUserId(user?.id!);/
 
-  const hasPastInterviews = userInterviews?.length > 0;
-  const hasUpcomingInterviews = latestInterviews?.length > 0;
+  const hasPastInterviews = (userInterviews ?? []).length > 0;
+  const hasUpcomingInterviews = (latestInterviews ?? []).length > 0;
 
   return (
    <>
@@ -42,7 +42,7 @@ const page = async () => {
     <div className='flex flex-wrap gap-4 interview-section'>
     {
       hasPastInterviews ? (
-        userInterviews.map((interview) => (
+        (userInterviews ?? []).map((interview) => (
           <InterviewCard {...interview} key={interview.id} />
         ))
       ) : (
@@ -58,7 +58,7 @@ const page = async () => {
     <div className=' flex flex-wrap gap-4 interview-section'>
       {
       hasUpcomingInterviews ? (
-        latestInterviews.map((interview) => (
+        (latestInterviews ?? []).map((interview) => (
           <InterviewCard {...interview} key={interview.id} />
         ))
       ) : (
