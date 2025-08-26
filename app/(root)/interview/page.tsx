@@ -2,10 +2,16 @@
 import React from 'react'
 import Agent from '@/components/Agent'
 import { getCurrentUser } from '@/lib/actions/auth.action'
+import { isAuthenticated } from '@/lib/actions/auth.action'
+import { redirect } from 'next/navigation'
 
 const page = async () => {
 
-  const user = await getCurrentUser();
+const user = await getCurrentUser();
+  const isUserAuthenticated = await isAuthenticated();
+  if (isUserAuthenticated) {
+    redirect('/Subscription');
+  }
 
 
   return (

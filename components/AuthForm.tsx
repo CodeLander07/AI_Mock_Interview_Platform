@@ -70,7 +70,7 @@ const AuthForm = ({type}:{type : FormType}) => {
                 idToken
             })
             toast.success("Sign in successful!");
-            router.push("/");
+            router.push("/dashboard");
         }
     } catch (error) {
         console.error("Error submitting form:");

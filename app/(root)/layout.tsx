@@ -6,13 +6,11 @@ import { redirect } from "next/navigation";
 import { isAuthenticated } from "@/lib/actions/auth.action";
 
 const RootLayout = async ({children} : {children: React.ReactNode}) => {
-
+    
   // const isUserAuthenticated = await isAuthenticated();
   // if (isUserAuthenticated) {
   //   redirect('/dashboard');
   // }
-
-
   return (
     <div className='root-layout'>
       <nav className="flex items-center justify-between p-4 text-white">
