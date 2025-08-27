@@ -21,11 +21,11 @@ const page = async () => {
    <>
    <section className='card-cta'>
     <div className='flex flex-col gap-6 max-w-lg'>
-      <h2>Get Interview Ready with AI-powered Practice & feedback</h2>
+      <h2>Generate Interview with AI-powered Practice & feedback</h2>
       <p className='text-lg'>
         Practice on real interview questions, get AI-generated feedback, and improve your performance with PrepWise.
       </p>
-      <Button  className='btn-primary max-sm:w-full' > <Link href='/interview'>Get Start</Link></Button>
+      <Button  className='btn-primary max-sm:w-full' > <Link href='/interview'>Generate Your First Interview</Link></Button>
     </div>
     <Image
       src="/robot.png"
