@@ -50,7 +50,8 @@ export async function signUp(params: SignUpParams) {
       success: true,
       message: "Account created successfully. Please sign in.",
     };
-  } catch (error: unknown) {
+  } 
+  catch (error: unknown) {
     console.error("Error creating user:", error);
 
     // Handle Firebase specific errors
@@ -129,7 +130,7 @@ export async function getCurrentUser(): Promise<User | null> {
 // Check if user is authenticated
 export async function isAuthenticated() {
   const user = await getCurrentUser();
-  return !!user;
+  return !! user;
 }
 
 
