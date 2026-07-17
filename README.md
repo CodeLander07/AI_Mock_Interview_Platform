@@ -1,9 +1,6 @@
-<h1>PrepMaster</h1>
-<h1>PrepWise &mdash; AI Mock Interview Platform</h1>
+<h1>PrepMaster AI Mock Interview Platform</h1>
 
-## Overview
-
-PrepWise is a Next.js 15 application that delivers AI-assisted mock interviews, dynamic feedback, and personalized preparation flows for aspiring candidates. The project combines modern UI patterns with AI services to streamline interview practice.
+Prepmaster is a Next.js 15 application that delivers AI-assisted mock interviews, dynamic feedback, and personalized preparation flows for aspiring candidates. The project combines modern UI patterns with AI services to streamline interview practice.
 
 ## Folder Structure
 
